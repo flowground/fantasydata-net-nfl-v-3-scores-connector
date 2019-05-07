@@ -1,0 +1,573 @@
+{
+    "title": "NFL v3 Scores",
+    "description": "NFL schedules, scores, odds, weather, and news API.",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/fantasydata.net/nfl-v3-scores/1.0/swagger.json",
+    "envVars": {},
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "http://api.fantasydata.net/v3/nfl/scores",
+                    "https://api.fantasydata.net/v3/nfl/scores",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "apiKeyHeader": {
+                "label": "Ocp-Apim-Subscription-Key (apiKeyHeader)",
+                "viewClass": "TextFieldView"
+            },
+            "apiKeyQuery": {
+                "label": "subscription-key (apiKeyQuery)",
+                "viewClass": "TextFieldView"
+            }
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "TeamsAll": {
+            "main": "./lib/actions/TeamsAll.js",
+            "title": "Teams (All)",
+            "description": "Gets all teams, including pro bowl teams.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/TeamsAll.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "AreGamesInProgress": {
+            "main": "./lib/actions/AreGamesInProgress.js",
+            "title": "Are Games In Progress",
+            "description": "Returns <code>true</code> if there is at least one game being played at the time of the request or <code>false</code> if there are none.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/AreGamesInProgress.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ByeWeeks": {
+            "main": "./lib/actions/ByeWeeks.js",
+            "title": "Bye Weeks",
+            "description": "Get bye weeks for the teams during a specified NFL season. ",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ByeWeeks.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "SeasonCurrent": {
+            "main": "./lib/actions/SeasonCurrent.js",
+            "title": "Season Current",
+            "description": "Year of the current NFL season. This value changes on July 1st. The earliest season for Fantasy data is 2001. The earliest season for Team data is 1985. The earliest season for Fantasy data is 2001. The earliest season for Team data is 1985.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/SeasonCurrent.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "WeekCurrent": {
+            "main": "./lib/actions/WeekCurrent.js",
+            "title": "Week Current",
+            "description": "Number of the current week of the NFL season. This value usually changes on Tuesday nights or Wednesday mornings at midnight EST. Week number is an integer between 1 and 21 or the word current. Weeks 1 through 17 are regular season weeks. Weeks 18 through 21 are post-season weeks.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/WeekCurrent.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "PlayerDetailsByFreeAgents": {
+            "main": "./lib/actions/PlayerDetailsByFreeAgents.js",
+            "title": "Player Details by Free Agents",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/PlayerDetailsByFreeAgents.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "GameStatsBySeasonDeprecatedUseTeamGameStatsInstead": {
+            "main": "./lib/actions/GameStatsBySeasonDeprecatedUseTeamGameStatsInstead.js",
+            "title": "Game Stats by Season (Deprecated, use Team Game Stats instead)",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/GameStatsBySeasonDeprecatedUseTeamGameStatsInstead.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "GameStatsByWeekDeprecatedUseTeamGameStatsInstead": {
+            "main": "./lib/actions/GameStatsByWeekDeprecatedUseTeamGameStatsInstead.js",
+            "title": "Game Stats by Week (Deprecated, use Team Game Stats instead)",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/GameStatsByWeekDeprecatedUseTeamGameStatsInstead.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "SeasonLastCompleted": {
+            "main": "./lib/actions/SeasonLastCompleted.js",
+            "title": "Season Last Completed",
+            "description": "Year of the most recently completed season. this value changes immediately after the Super Bowl. The earliest season for Fantasy data is 2001. The earliest season for Team data is 1985.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/SeasonLastCompleted.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "WeekLastCompleted": {
+            "main": "./lib/actions/WeekLastCompleted.js",
+            "title": "Week Last Completed",
+            "description": "\n        Number of the last completed week in the current NFL season. This value changes immediately after the last game of the week is completed and the data is available. This usually happens right after the Monday night game.\n        Week number is an integer between 1 and 21 or the word current. Weeks 1 through 17 are regular season weeks. Weeks 18 through 21 are post-season weeks.\n      ",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/WeekLastCompleted.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "News": {
+            "main": "./lib/actions/News.js",
+            "title": "News",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/News.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "NewsByDate": {
+            "main": "./lib/actions/NewsByDate.js",
+            "title": "News by Date",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/NewsByDate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "NewsByPlayer": {
+            "main": "./lib/actions/NewsByPlayer.js",
+            "title": "News by Player",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/NewsByPlayer.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "NewsByTeam": {
+            "main": "./lib/actions/NewsByTeam.js",
+            "title": "News by Team",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/NewsByTeam.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "XPing": {
+            "main": "./lib/actions/XPing.js",
+            "title": "X Ping",
+            "description": "Ping NFL API",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/XPing.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "PlayerDetailsByPlayer": {
+            "main": "./lib/actions/PlayerDetailsByPlayer.js",
+            "title": "Player Details by Player",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/PlayerDetailsByPlayer.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "PlayerDetailsByAvailable": {
+            "main": "./lib/actions/PlayerDetailsByAvailable.js",
+            "title": "Player Details by Available",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/PlayerDetailsByAvailable.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "PlayerDetailsByTeam": {
+            "main": "./lib/actions/PlayerDetailsByTeam.js",
+            "title": "Player Details by Team",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/PlayerDetailsByTeam.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "PlayerDetailsByRookieDraftYear": {
+            "main": "./lib/actions/PlayerDetailsByRookieDraftYear.js",
+            "title": "Player Details by Rookie Draft Year",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/PlayerDetailsByRookieDraftYear.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Schedule": {
+            "main": "./lib/actions/Schedule.js",
+            "title": "Schedule",
+            "description": "Game schedule for a specified season.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Schedule.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ScoresBySeason": {
+            "main": "./lib/actions/ScoresBySeason.js",
+            "title": "Scores by Season ",
+            "description": "Game scores for a specified season.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ScoresBySeason.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ScoresByWeek": {
+            "main": "./lib/actions/ScoresByWeek.js",
+            "title": "Scores by Week",
+            "description": "Get game scores for a specified week of a season.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ScoresByWeek.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ScoresByWeekSimulation": {
+            "main": "./lib/actions/ScoresByWeekSimulation.js",
+            "title": "Scores by Week Simulation",
+            "description": "Gets simulated live scores of NFL games, covering the Conference Championship games on January 21, 2018.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ScoresByWeekSimulation.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Stadiums": {
+            "main": "./lib/actions/Stadiums.js",
+            "title": "Stadiums",
+            "description": "This method returns all stadiums.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Stadiums.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Standings": {
+            "main": "./lib/actions/Standings.js",
+            "title": "Standings",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Standings.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "TeamGameStats": {
+            "main": "./lib/actions/TeamGameStats.js",
+            "title": "Team Game Stats",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/TeamGameStats.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "TeamSeasonStats": {
+            "main": "./lib/actions/TeamSeasonStats.js",
+            "title": "Team Season Stats",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/TeamSeasonStats.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "TeamsActive": {
+            "main": "./lib/actions/TeamsActive.js",
+            "title": "Teams (Active)",
+            "description": "Gets all active teams.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/TeamsActive.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "TeamsBySeason": {
+            "main": "./lib/actions/TeamsBySeason.js",
+            "title": "Teams by Season",
+            "description": "List of teams playing in a specified season.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/TeamsBySeason.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Timeframes": {
+            "main": "./lib/actions/Timeframes.js",
+            "title": "Timeframes",
+            "description": "Get detailed information about past, present, and future timeframes.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Timeframes.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "SeasonUpcoming": {
+            "main": "./lib/actions/SeasonUpcoming.js",
+            "title": "Season Upcoming",
+            "description": "Year of the current NFL season, if we are in the mid-season. If we are in the off-season, then year of the next upcoming season. This value changes immediately after the Super Bowl. The earliest season for Fantasy data is 2001. The earliest season for Team data is 1985.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/SeasonUpcoming.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "WeekUpcoming": {
+            "main": "./lib/actions/WeekUpcoming.js",
+            "title": "Week Upcoming",
+            "description": "Number of the upcoming week of the NFL season. This value changes immediately after the final game of the week is completed. We consider upcoming week to be the current week, until current week is over. Week number is an integer between 1 and 21 or the word current. Weeks 1 through 17 are regular season weeks. Weeks 18 through 21 are post-season weeks.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/WeekUpcoming.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

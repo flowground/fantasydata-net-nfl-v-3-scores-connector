@@ -1,0 +1,26 @@
+{
+    "type": "object",
+    "properties": {
+        "format": {
+            "required": true,
+            "type": "string",
+            "enum": [
+                "XML",
+                "JSON"
+            ],
+            "default": "XML"
+        },
+        "type": {
+            "required": true,
+            "type": "string",
+            "enum": [
+                "current",
+                "upcoming",
+                "completed",
+                "recent",
+                "all"
+            ],
+            "default": "current"
+        }
+    }
+}
